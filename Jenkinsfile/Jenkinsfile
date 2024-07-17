@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    environment {
+        GIT_REPO = 'https://github.com/your-username/multi-env-deployment.git'
+        BRANCH = 'main'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: "${BRANCH}", url: "${GIT_REPO}"
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    def envs = ['dev', 'staging', 'prod']
+                    for (env in envs) {
+                        stage("Build for ${env}") {
+                            sh "echo Building for ${env}"
+                            // Add your build steps here
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    def envs = ['dev', 'staging', 'prod']
+                    for (env in envs) {
+                        stage("Deploy to ${env}") {
+                            sh "echo Deploying to ${env}"
+                            // Add your deployment steps here
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
