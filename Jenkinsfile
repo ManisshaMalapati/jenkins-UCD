@@ -23,7 +23,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 sh 'source venv/bin/activate'
-                sh 'venv/bin/pytest -v tests/'
+                sh 'export PYTHONPATH=./ && venv/bin/pytest -v tests/'
             }
         }
     }
