@@ -15,13 +15,15 @@ pipeline {
                 sh 'source venv/bin/activate'
                 sh 'venv/bin/pip install --upgrade pip'
                 sh 'venv/bin/pip install -r requirements.txt'
+                sh 'venv/bin/pip install --upgrade numpy'
+                sh 'venv/bin/pip install --upgrade pandas'
             }
         }
         
         stage('Run Tests') {
             steps {
                 sh 'source venv/bin/activate'
-                sh 'venv/bin/pytest -v tests/' 
+                sh 'venv/bin/pytest -v tests/'
             }
         }
     }
