@@ -21,7 +21,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 sh 'source venv/bin/activate'
-                sh 'venv/bin/pytest tests/'
+                sh 'venv/bin/pytest -v tests/' 
             }
         }
     }
