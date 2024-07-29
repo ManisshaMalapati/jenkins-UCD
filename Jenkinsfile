@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+
     stages {
         stage('Checkout') {
             steps {
@@ -8,7 +8,7 @@ pipeline {
                     url: 'https://github.com/ManisshaMalapati/jenkins-UCD.git'
             }
         }
-        
+
         stage('Install Dependencies') {
             steps {
                 sh 'python3 -m venv venv'
@@ -17,14 +17,14 @@ pipeline {
                 sh 'venv/bin/pip install -r requirements.txt'
             }
         }
-        
+
         stage('Run Tests') {
             steps {
-                sh 'venv/bin/pytest'
+                sh 'export PYTHONPATH=./ && venv/bin/pytest'
             }
         }
     }
-    
+
     post {
         always {
             junit '**/test-results/*.xml'
