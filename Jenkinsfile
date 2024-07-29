@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/ManisshaMalapati/jenkins-UCD.git'
+                git branch: 'main',
+                    url: 'https://github.com/ManisshaMalapati/jenkins-UCD.git'
             }
         }
         
