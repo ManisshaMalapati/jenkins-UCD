@@ -22,8 +22,8 @@ def main():
 
     # ETL process
     df = extract(input_path)
-    df = transform(df)
-    load(df, output_path)
+    transform_df = transform(df)
+    load(transform_df, output_path)
 
 if __name__ == "__main__":
     main()
